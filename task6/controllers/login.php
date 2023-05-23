@@ -5,12 +5,15 @@
     $password=$_POST['password'];
     $submit=$_POST['submit'];
 
-    print_r($_POST);
-    
+
+    $disallow = ['~', '\'', '"', '<', '>', '.', '%'];
+    $login = str_replace($disallow, '', $login);
+    $password = str_replace($disallow, '', $password);
 
     if($submit){
         if($login && $password){       
             $str_login="SELECT * FROM `users` where `login`= '$login' and `password`='$password'";
+            
             $run_login=mysqli_query($connect,$str_login);
             $login_users=mysqli_num_rows($run_login);
             
