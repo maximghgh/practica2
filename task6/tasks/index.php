@@ -2,10 +2,10 @@
 
     include '../controllers/db.php';
     if(!$_SESSION['users']){
-        header("Location:/tasks");
+        header("Location:/task");
         exit();
     }
-    $id_users=$_SESSION['users']['id'];        
+       
 ?>
 
 <!DOCTYPE html>
