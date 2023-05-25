@@ -5,6 +5,10 @@
         header("Location:/task");
         exit();
     }
+    elseif($_POST)
+    {
+        header("Location:/task");
+    }
 
 
  
