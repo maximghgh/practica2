@@ -48,25 +48,21 @@
                 $out_taski=mysqli_fetch_array($run_tasks);
                 echo "
                 <div class=all>
-                    <a class=error href=application/model/del.php></a>
-                    <a class=error href=/model/del.php?id_tasal=$id_users>Удалить все</a>
+                    <a class=error href=/task/delalltask/?id_tasal=$id_users>Удалить все</a>
                 ";
                 if($out_taski['status']== 0){
                     echo "
-                        <a class=good href=application/model/status.php?id_statusal=$id_users&status=$out_taski[status] class=error>Выполнить все</a>
+                        <a class=good href=/task/statusall/?id_statusal=$id_users&status=$out_taski[status] class=error>Выполнить все</a>
                     ";
                 }
                 elseif($out_taski['status']== 1){
                     echo "
-                        <a class=error href=application/model/status.php?id_statusal=$id_users&status=$out_taski[status] class=good>Отменить все</a>
+                        <a class=error href=/task/statusallno/?id_statusalno=$id_users&status=$out_taski[status] class=good>Отменить все</a>
                     ";
                 }
                 echo "
                     </div>
                 ";
-                ?>
-
-                <?
                     $connect=mysqli_connect('localhost','root','','tasklist');
                     $id_users=$_SESSION['users']['id'];
 
@@ -80,7 +76,7 @@
                             <div>
                                 <p>$out_tas[description]</p>
                                 <div class=actions>
-                                    <a class=error href=application/model/del.php?id_tas=$out_tas[id]>Удалил</a>";
+                                    <a class=error href=/task/del/?id_tas=$out_tas[id]>Удалил</a>";
                                     $color = "green";
                                     if($out_tas['status']== 0){
                                         echo"
