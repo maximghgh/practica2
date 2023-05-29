@@ -29,19 +29,7 @@
             {
                 $_SESSION['good']="<font class=font color=red>Удалить не удалось</font>";
             }
-            $this->view->generate('view_task.php', 'template_view.php');
-
-            $routes = explode('/', $_SERVER['REQUEST_URI']);
-
-            if ( !empty($routes[1]) )
-            {	
-                $controller_name = $routes[1];
-            }
-            
-            if ( !empty($routes[2]) )
-            {
-                $action_name = $routes[2];
-            }
+        $this->view->generate('view_task.php', 'template_view.php');
         }
 
 
@@ -64,7 +52,7 @@
                     $_SESSION['good']="<font class=font color=red>Удалить не удалось</font>";
                 }
             }
-            $this->view->generate('view_task.php', 'template_view.php');
+        $this->view->generate('view_task.php', 'template_view.php');
         }
 
         function action_statusall()
@@ -80,24 +68,79 @@
             else{
                 $_SESSION['good']="<font class=font color=red>Ошибка выполнения</font>";
             }
-            $this->view->generate('view_task.php', 'template_view.php');
-            die();
+        $this->view->generate('view_task.php', 'template_view.php');
         }
 
-        // function action_statusallno()
-        // {
-        //     $id_statusalno=$_GET['id_statusalno'];
-        //     $id_users=$_SESSION['users']['id'];
-        //     $connect=mysqli_connect('localhost','root','','tasklist');
-        //     $upd_tass="UPDATE `tasks` SET `status`='0' WHERE `user_id`='$id_users'";
-        //     $run_upd_tass=mysqli_query($connect,$upd_tass);
-        //     if($run_upd_tass){
-        //         $_SESSION['good']="<font class=font color=green>Все задания отменены</font>";
-        //     }
-        //     else{
-        //         $_SESSION['good']="<font class=font color=red>Ошибка выполнения</font>";
-        //     }
-        //     $this->view->generate('view_task.php', 'template_view.php');
-        // }
+        function action_statusallno()
+        {
+            $id_statusalno=$_GET['id_statusalno'];
+            $id_users=$_SESSION['users']['id'];
+            $connect=mysqli_connect('localhost','root','','tasklist');
+            $upd_tass="UPDATE `tasks` SET `status`='0' WHERE `user_id`='$id_users'";
+            $run_upd_tass=mysqli_query($connect,$upd_tass);
+            if($run_upd_tass){
+                $_SESSION['good']="<font class=font color=green>Все задания отменены</font>";
+            }
+            else{
+                $_SESSION['good']="<font class=font color=red>Ошибка выполнения</font>";
+            }
+        $this->view->generate('view_task.php', 'template_view.php');
+        }
+
+        function action_statusyes()
+        {
+            $connect=mysqli_connect('localhost','root','','tasklist');
+
+            $id_task=$_GET['id_task'];
+            $id_users=$_SESSION['users']['id'];
+            $status=$_GET['status'];
+
+            $upd_tas="UPDATE `tasks` SET `status`='1' WHERE `id`='$id_task'";
+            $run_upd_tas=mysqli_query($connect,$upd_tas);
+            if($id_task)
+            {
+                if($status==0)
+                {
+                    if($run_upd_tas)
+                    {
+                        $_SESSION['good']="<font class=font color=green>Все задания выполнены</font>";
+                    }
+                    else
+                    {
+                        $_SESSION['good']="<font class=font color=red>Ошибка выполнения</font>";
+                    }
+                }
+            }
+        $this->view->generate('view_task.php', 'template_view.php');
+
+        }
+
+        function action_statusno()
+        {            
+            $connect=mysqli_connect('localhost','root','','tasklist');
+
+            $id_task=$_GET['id_task'];
+            $id_users=$_SESSION['users']['id'];
+            $status=$_GET['status'];
+
+            $upd_tas="UPDATE `tasks` SET `status`='0' WHERE `id`='$id_task'";
+            $run_upd_tas=mysqli_query($connect,$upd_tas);
+            if($id_task)
+            {
+                if($status==1)
+                {
+                    if($run_upd_tas)
+                    {
+                        $_SESSION['good']="<font class=font color=green>Все задания выполнены</font>";
+                    }
+                    else
+                    {
+                        $_SESSION['good']="<font class=font color=red>Ошибка выполнения</font>";
+                    }
+                }
+            }
+        $this->view->generate('view_task.php', 'template_view.php');
+        }
+
     }
 ?>

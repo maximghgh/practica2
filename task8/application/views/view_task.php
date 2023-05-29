@@ -27,7 +27,7 @@
         <header>
             <div>Привет, <?=$_SESSION['users']['login']?></div>
             
-            <a href="../models/exit.php">Выйти с аккаунта</a>
+            <a href="/exit">Выйти с аккаунта</a>
         </header>
         <div class="info">
             <h1>Задания</h1>
@@ -80,13 +80,13 @@
                                     $color = "green";
                                     if($out_tas['status']== 0){
                                         echo"
-                                            <a class=good href=application/model/status.php?id_task=$out_tas[id]&status=$out_tas[status] class=error>Готово</a> 
+                                            <a class=good href=/task/statusyes/?id_task=$out_tas[id]&status=$out_tas[status] class=error>Готово</a> 
                                         ";
                                         $color="red";
                                     }
                                     elseif($out_tas['status']== 1){
                                         echo "
-                                            <a class=error href=application/model/status.php?id_task=$out_tas[id]&status=$out_tas[status]' class=good>Отменить</a>
+                                            <a class=error href=/task/statusno/?id_task=$out_tas[id]&status=$out_tas[status]' class=good>Отменить</a>
                                         ";
                                     }
                                 echo "    
