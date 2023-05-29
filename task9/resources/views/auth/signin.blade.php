@@ -3,8 +3,8 @@
 @section('content')
 <div class="row">
     <div class="col-lg-5 ">
-        <h1>Регистрация</h1>
-        <form method="POST" action="{{ route('auth.signup') }}" novalidate>
+        <h1>Войти в аккаунт</h1>
+        <form method="POST" action="{{ route('auth.signin') }}" novalidate>
         @csrf
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -14,20 +14,8 @@
                     {{ $errors->first('email') }}
                 </span>
             @endif
-            <div id="emailHelp" class="form-text">We ll never share your email with anyone else.</div>
-        </div>
-
-        <div class="mb-3">
-            <label for="password" class="form-label">Login</label>
-            <input type="text" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : ''}}" id="password" placeholder="Например: user" value="{{ Request::old('username') ?: '' }}">
-        @if($errors->has('username'))
-            <span class="help-block text-danger">
-                {{ $errors->first('username') }}
-            </span>
-        @endif
         </div>
         
-
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : ''}}" id="password" placeholder="Минимум 8 символов">
@@ -37,10 +25,11 @@
                 </span>
             @endif
         </div>
-        
-
-
-        <button type="submit" name="submit" class="btn btn-primary">Создать аккаунт</button>
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Войти</button>
         </form>
     </div>
 </div>
