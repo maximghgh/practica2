@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">Social</a>
+        <a class="navbar-brand" href="{{ route('home') }}">Samurai</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,10 +8,10 @@
         @if (Auth::check())
         <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Стена</a>
+                <a class="nav-link active" aria-current="page" href="{{ route('home')}}">Стена объявлений</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('friend.index') }}">Друзья</a>
+                <a class="nav-link" href="{{ route('friend.index') }}">Мой друзья</a>
             </li>
             <form method="GET" action="{{ route('search.results') }}" class="d-flex ">
                 <input class="form-control me-2 " name="query" type="search" placeholder="Поиск..." aria-label="Search">
@@ -23,7 +23,7 @@
 
             @if (Auth::check())
             <li class="nav-item"> 
-                <a href="{{ route('profile.index', ['username' => Auth::user()->username]) }}" class="nav-link">{{ Auth::user()->getNameOrUsername() }}</a>
+                <a href="{{ route('profile.index', ['username' => Auth::user()->username]) }}" class="nav-link">Профиль: {{ Auth::user()->getNameOrUsername() }}</a>
             </li>
             <li class="nav-item"> 
                 <a href="{{ route('profile.edit')}}" class="nav-link">Редактировать профиль</a>

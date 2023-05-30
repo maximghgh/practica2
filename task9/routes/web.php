@@ -44,3 +44,17 @@ Route::post('/profile/edit', 'ProfileController@postEdit')->middleware('auth')->
 Route::get('/friends', 'FriendController@getIndex')->middleware('auth')->name('friend.index');
 Route::get('/friends/add/{username}', 'FriendController@getAdd')->middleware('auth')->name('friend.add');
 Route::get('/friends/accept/{username}', 'FriendController@getAccept')->middleware('auth')->name('friend.accept');
+Route::post('/friends/delete/{username}', 'FriendController@postDelete')->middleware('auth')->name('friend.delete');
+
+//стена объявлений 
+
+Route::post('/status', 'StatusController@postStatus')->middleware('auth')->name('status.post');
+Route::post('/status/{statusId}/reply', 'StatusController@postReply')->middleware('auth')->name('status.reply');
+
+//Like 
+
+Route::get('/status/{statusId}/like', 'StatusController@getLike')->middleware('auth')->name('status.like');
+
+//удаление комментария
+
+Route::get('/status/{statusId}/delete', 'StatusController@deleteStatus')->middleware('auth')->name('status.delete');

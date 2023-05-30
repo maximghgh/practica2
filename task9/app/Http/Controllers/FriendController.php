@@ -26,7 +26,7 @@ class FriendController extends Controller
         if ( ! $user) {
             return redirect()
             ->route('home')
-            ->withwith('info', 'Пользователь не найден!');
+            ->with('info', 'Пользователь не найден!');
         }
 
 
@@ -39,20 +39,20 @@ class FriendController extends Controller
         {
             return redirect()
             ->route('profile.index', ['username' => $user->username])
-            ->withwith('info', 'Пользователю отправлен запрос в друзья');
+            ->with('info', 'Пользователю отправлен запрос в друзья');
         }
 
         if( Auth::user()->isFriendWith($user))
         {
             return redirect()
             ->route('profile.index', ['username' => $user->username])
-            ->withwith('info', 'Пользователю уже у вас в друзьях');
+            ->with('info', 'Пользователю уже у вас в друзьях');
         }
 
         Auth::user()->addFriend($user);
         return redirect()
         ->route('profile.index', ['username' => $user->username])
-        ->withwith('info', 'Пользователю отправлен запрос в друзья');
+        ->with('info', 'Пользователю отправлен запрос в друзья');
 
         
     }
@@ -64,7 +64,7 @@ class FriendController extends Controller
         if ( ! $user) {
             return redirect()
             ->route('home')
-            ->withwith('info', 'Пользователь не найден!');
+            ->with('info', 'Пользователь не найден!');
         }
 
         if ( ! Auth::user()->hasFriendRequestReceived($user) ) 
@@ -77,7 +77,19 @@ class FriendController extends Controller
         
         return redirect()
         ->route('home')
-        ->withwith('info', 'Запрос в друзья принят');
+        ->with('info', 'Запрос в друзья принят');
     }
 
+    public function postDelete($username)
+    {
+        $user = User::where('username', $username)->first();
+
+        if( !Auth::user()->isFriendWith($user))
+        {
+            return redirect()->back();
+        }
+        Auth::user()->deleteFriend($user);
+
+        return redirect()->back()->with('info', 'Удален из друзей');
+    }
 }
