@@ -57,7 +57,9 @@
         <li class="list-inline-item">
             {{$status->likes->count()}}{{Str::plural(' like', $status->count())}}
         </li><hr>
-        <h4>Комментарий под записью</h4><hr>
+        <h4>Комментарий под записью
+        </h4><hr>
+        
     </ul>
 
 @foreach ($status->replies as $reply)
@@ -90,6 +92,7 @@
                     {{$reply->likes->count()}}{{Str::plural(' like', $reply->count())}}
                 </li>
             </ul>
+            
         </div>
     </div>
     @endforeach
@@ -100,16 +103,44 @@
                     @if($errors->has("reply-{$status->id}"))
                         <div id="validationServer03Feedback" class="invalid-feedback">
                             {{ $errors->first("reply-{$status->id}") }}
-                        </div>
+                        </div>                 
                     @endif
                     </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Отправить комментарий</button>
+                        <button type="submit" onclik="" class="btn btn-primary btn-sm">Отправить комментарий</button>
+                        
                 </form>
+                
             </div>
         </div>
     @endforeach
+<button type="button" class="btn btn-primary btn-sm mb-3">Показать все комментарии</button>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+                <script>
+                $(document).ready(function() {
+                    $('button').click(function(e) {
+                        // Stop form from sending request to server
+                        e.preventDefault();
 
-    {{ $statuses->links() }}
+                        var btn = $(this);
+
+                        $.ajax({
+                        method: "POST",
+                        url: "https://jsonplaceholder.typicode.com/posts",
+                        dataType: "json",
+                        data: {
+                            "name": ,
+                            'input': $('input').val()
+                        },
+                        success: function(data) {
+                            console.log(data);
+                        },
+                        error: function(er) {
+                            console.log(er);
+                        }
+                        });
+                    })
+                    });
+                </script>
 @endif
     </div>
 </div>

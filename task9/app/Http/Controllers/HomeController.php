@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -17,13 +18,16 @@ class HomeController extends Controller
                 return $query->where('user_id', Auth::user()->id)->orWhereIn('user_id', Auth::user()->friends()->pluck('id'));
 
             })
-            ->orderBy('created_at', 'desc')->paginate(20);
+            ->orderBy('created_at', 'desc')->paginate(5);
 
             return view('timeline.index', compact('statuses'));
         }
-
-
         return view('home');
     }
-    
+
+    public function comment()
+    {
+        
+    }
+
 }

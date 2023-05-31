@@ -14,6 +14,7 @@
 
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/status', 'HomeController@comment')->name('home');
 // Route::get('/alert', function(){
 //     return redirect()->route('home')->with('info', 'Вы вошли в аккаунт!');
 // });
