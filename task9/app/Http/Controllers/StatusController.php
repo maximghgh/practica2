@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\User;
 use App\Models\Status;
-use App\Post;
-use App\Models\Like;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

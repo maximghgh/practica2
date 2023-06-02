@@ -1,31 +1,6 @@
-@extends ('templates.default')
 
-@section ('content')
-<div class="row">
-    <div class="col-lg-6">
-    <h3 class="mb-3">Стена объявлений:</h3>
-        <form method="POST" action="{{ route('status.post')}}">
-        @csrf
-            <div class="form-group">            
-                <textarea name="status" class="form-control mb-3{{ $errors->has('status') ? ' is-invalid' : '' }}" placeholder="Что новoгo {{ Auth::user()->getFirstNameOrUsername() }}?" rows="3"></textarea>
-            @if($errors->has('status'))
-                <div id="validationServer03Feedback" class="invalid-feedback">
-                    {{ $errors->first('status') }}
-                </div>
-            @endif
-            </div>
-            <button type="submit" class="btn btn-primary ">Опубликовать</button>
-        </form>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-lg-6"><hr>
-
-@if( !$statuses->count() )
-    <p>Пока нет записей:(</p>
-@else
-    @foreach ($statuses as $status)
+@foreach ($statuses as $status)
     <div id="statuses">
 <div class="media">
     <a class="mr-3" href="{{ route('profile.index', ['username' => $status->user->username]) }}">
@@ -114,31 +89,3 @@
             </div>
         </div>
     @endforeach
-        <div id="show-more">
-            <button id="show" type="button" class="btn btn-primary mb-5">Показать все</button>
-        </div>
-    </div>
-@endif
-    </div>
-</div>
-
-@endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-<script type='text/javascript'>
-
-    $(document).ready(function() 
-    {
-        $('#show').click(function(e) 
-        {
-            e.preventDefault();
-            var th = $(this);
-            $.ajax({type: "GET", url: "showmore", data: th.serialize()}).done(
-                function (res) {
-                    $('#statuses').empty();
-                    $('#statuses').html(res);
-                }
-            );
-        });
-    });  
-</script>
