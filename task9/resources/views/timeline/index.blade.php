@@ -27,7 +27,7 @@
 @else
     @foreach ($statuses as $status)
     <div id="statuses">
-<div class="media">
+    <div class="media">
     <a class="mr-3" href="{{ route('profile.index', ['username' => $status->user->username]) }}">
         <img class="media-object rounded" src="{{ $status->user->getAvatarUrl()}}" alt="{{ $status->user->getNameOrUsername() }}">
         <a href="{{ route('profile.index', ['username' => $status->user->username]) }}">
