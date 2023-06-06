@@ -23,12 +23,25 @@ Route::post('/signup', 'AuthController@postSignup');
 Route::get('/signin', 'AuthController@getSignin')->name('auth.signin');
 Route::post('/signin', 'AuthController@postSignin');
 
+Route::get('/signout', 'AuthController@getSignout')->name('auth.signout');
+
 //авторы
-Route::get('/avtors', 'AvtorController@getAvtors')->name('avtors');
+Route::get('/avtors', 'AvtorController@getAvtors')->middleware('auth')->name('avtors');
 
 //профиль
 
-Route::get('/avtors/{username}', 'ProfileController@getProfile')->name('profile.index');
+Route::get('/avtors/{username}', 'ProfileController@getProfile')->middleware('auth')->name('profile.index');
 
+//книги
 
+Route::get('/book/{bookid}', 'BookController@read')->name('book');
 
+//добавление книги
+Route::post('/add/{username}', 'BookController@add')->name('add');
+
+//редактирование книги
+Route::get('/edit/{bookid}', 'BookController@getedit')->middleware('auth')->name('edit');
+Route::post('/edit/{bookid}', 'BookController@postEdit')->middleware('auth');
+
+//удаление 
+Route::get('/delete/{bookid}', 'BookController@deleteBook')->middleware('auth')->name('delete');

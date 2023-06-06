@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Book;
 use Illuminate\Http\Request;
+
 
 class ProfileController extends Controller
 {
@@ -11,7 +13,13 @@ class ProfileController extends Controller
     {
         $avtor=User::where('username',$username)->first();
 
-        return view('profile.index', $avtor);
+        $books=$avtor->books()->get();
+
+
+        return view('profile.index', [
+            'avtor' => $avtor,
+            'books' => $books
+        ]);
     }
     
 }

@@ -14,16 +14,10 @@
                     <a class="nav-link" aria-current="page" href="#">Мой подписки</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Создать книгу</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Мои книги</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="{{ route('profile.index', ['username' => Auth::user()->username] )}}">{{ Auth::user()->getNameOrUsername() }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти из аккаунта</a>
+                    <a class="nav-link" href="{{ route('auth.signout')}}">Выйти из аккаунта</a>
                 </li>
             </ul>
         @else
