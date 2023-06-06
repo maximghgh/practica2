@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -30,23 +31,37 @@ class BookController extends Controller
     {
         $book=Book::find($bookid);
 
-        if(Auth::user()->id!==$book->user->id) // проверка пользователя
+        if(Auth::user()->id==$book->user->id) 
         {
-            return redirect()->route('home');
+            $book=Book::where('id', $bookid)->first();
+
+            
+            return view('libraly.book', [
+                'book' => $book
+            ]);
         }
 
-        $book=Book::where('id', $bookid)->first();
+        $read=DB::table('readers')->where('user_id', $book->user->id)->where('reader_id', Auth::user()->id)->first();
 
-        return view('libraly.book', [
-            'book' => $book
-        ]);
+        if(Auth::user()->id==$read->reader_id)
+        {
+            $book=Book::where('id', $bookid)->first();
+
+            return view('libraly.book',[
+                'book' => $book
+            ]);
+        }
+
+        return redirect()->route('home');
+
+        
     }
 
         public function getedit($bookid)
     {
         $book=Book::find($bookid);
 
-        if(Auth::user()->id!==$book->user->id) // проверка пользователя
+        if(Auth::user()->id!==$book->user->id) 
         {
             return redirect()->route('home');
         }

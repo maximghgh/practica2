@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-lg-6">
             <h3>Автор: {{$avtor->first_name." ".$avtor->last_name}}</h3><hr>
+
             @if (Auth::user()->id===$avtor->id)
             <h4>Добавить книгу</h4>
     <form method="POST" action="{{route('add', ['username' => $avtor->id])}}" novalidate>
@@ -28,11 +29,22 @@
     </div>
         <button type="submit" class="btn btn-primary mb-3">Опубликовать</button><hr>
     </form>
+    @else
+    @if($reader)
+        @if ($reader->accepted===1)
+            <a href="{{ route('reader.del', ['username' => $avtor->id] )}}" type="button" class="btn btn-danger">Убрать доступ из библиотеки</a>
+        @else
+            <a href="{{ route('reader', ['username' => $avtor->id] )}}" type="button" class="btn btn-success">Дать доступ к своей библиотеке</a><hr>
+        @endif
+    @else
+        <a href="{{ route('reader', ['username' => $avtor->id] )}}" type="button" class="btn btn-success">Дать доступ к своей библиотеке</a><hr>
     @endif
+        @endif
         <h4>Книги {{$avtor->first_name." ".$avtor->last_name}}:</h4>
         @foreach ($books as $book)
             @include('libraly.books')
         @endforeach
+    
     </div>
 </div>
 

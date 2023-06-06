@@ -45,3 +45,7 @@ Route::post('/edit/{bookid}', 'BookController@postEdit')->middleware('auth');
 
 //удаление 
 Route::get('/delete/{bookid}', 'BookController@deleteBook')->middleware('auth')->name('delete');
+
+//добавление доступа и удаление из доступа к библиотеке
+Route::get('reader/{username}', 'ReaderController@addReader')->middleware('auth')->name('reader');
+Route::get('reader/del/{username}', 'ReaderController@delReader')->middleware('auth')->name('reader.del');
