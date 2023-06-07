@@ -49,3 +49,11 @@ Route::get('/delete/{bookid}', 'BookController@deleteBook')->middleware('auth')-
 //добавление доступа и удаление из доступа к библиотеке
 Route::get('reader/{username}', 'ReaderController@addReader')->middleware('auth')->name('reader');
 Route::get('reader/del/{username}', 'ReaderController@delReader')->middleware('auth')->name('reader.del');
+
+//доступ по ссылке
+
+Route::get('link', 'LinkController@getLink')->name('link');
+
+Route::get('links/{username}', 'LinkController@viewLink');
+
+Route::get('links/book/{bookid}', 'BookController@readLink')->name('links.book');

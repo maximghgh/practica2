@@ -43,7 +43,7 @@ class BookController extends Controller
 
         $read=DB::table('readers')->where('user_id', $book->user->id)->where('reader_id', Auth::user()->id)->first();
 
-        if(Auth::user()->id==$read->reader_id)
+        if(Auth::user()->id==$read->reader_id && $read->accepted===1)
         {
             $book=Book::where('id', $bookid)->first();
 
@@ -88,8 +88,7 @@ class BookController extends Controller
         ]);
 
         Book::where('id', $bookid)
-              ->update(['name_book' => $request->input('name_book'),
-                        'text' => $request->input('text')
+              ->update(['name_book' => $request->input('name_book'),'text' => $request->input('text')
             ]);
         
         return redirect()->back()->with('info', 'Публикация изменена');
@@ -106,5 +105,25 @@ class BookController extends Controller
         Book::where('id', $bookid)->delete();
 
         return redirect()->back()->with('info', 'Книга удалена из вашей библиотеки');
+    }
+
+    public function readLink($bookid)
+    {
+        $book=Book::find($bookid);
+
+        if(!$book) return redirect()->route('home');
+
+        $link=DB::table('links')->where('user_id', $book->user->id)->first();
+
+        if(!$link) return redirect()->back();
+
+        if($book->user->id===$link->user_id)
+        {
+            return view('libraly.book', [
+                'book' => $book
+            ]);
+        }
+
+       return redirect()->back();
     }
 }

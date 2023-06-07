@@ -31,11 +31,19 @@ class ProfileController extends Controller
             $read_book='';
         }
 
+        $link=DB::table('links')->where('user_id', Auth::user()->id)->first();
+
+        if($link===null)
+        {
+            $link='';
+        }
+
         return view('profile.index', [
             'avtor' => $avtor,
             'books' => $books,
             'reader' => $reader,
-            'read_book' => $read_book
+            'read_book' => $read_book,
+            'link' => $link
         ]);
     }
     
