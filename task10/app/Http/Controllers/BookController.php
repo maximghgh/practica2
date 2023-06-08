@@ -109,11 +109,9 @@ class BookController extends Controller
 
     public function readLink($bookid)
     {
-        $book=Book::find($bookid);
+        $book = Book::find($bookid);
 
-        if(!$book) return redirect()->route('home');
-
-        $link=DB::table('links')->where('user_id', $book->user->id)->first();
+        $link = DB::table('links') -> where('user_id', $book -> user -> id) -> first();
 
         if(!$link) return redirect()->back();
 

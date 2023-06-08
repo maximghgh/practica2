@@ -11,9 +11,6 @@
                     <a class="nav-link" aria-current="page" href="{{ route('avtors')}}">Наши авторы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Мой подписки</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="{{ route('profile.index', ['username' => Auth::user()->username] )}}">{{ Auth::user()->getNameOrUsername() }}</a>
                 </li>
                 <li class="nav-item">
@@ -23,10 +20,7 @@
         @else
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Прочитать книгу</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('auth.signin')}}">Войти в аккаунта</a>
+                    <a class="nav-link active" href="{{ route('auth.signin')}}">Войти в аккаунта</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('auth.signup')}}">Зарегистрироваться</a>

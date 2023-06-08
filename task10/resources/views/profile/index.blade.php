@@ -3,9 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-6">
-            <h3>Автор: {{$avtor->first_name." ".$avtor->last_name}}</h3>
+            <h3>Автор: {{$avtor->first_name." ".$avtor->last_name}}</h3><hr>
             @if (Auth::user()->id===$avtor->id)
-            <h4>Добавить книгу</h4>
+            <h4>Добавить книгу : </h4>
     <form method="POST" action="{{route('add', ['username' => $avtor->id])}}" novalidate>
     @csrf
     <div class="mb-3">
