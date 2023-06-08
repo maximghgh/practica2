@@ -4,11 +4,6 @@
     <div class="row">
         <div class="col-lg-6">
             <h3>Автор: {{$avtor->first_name." ".$avtor->last_name}}</h3>
-            <a href="{{ route('link') }}" class="btn btn-primary">Поделиться библиотекой</a>
-            @if ($link)
-                Ссылка на библиотеку: http://task10/links/{{$link->user_id}}
-            @endif<hr>
-
             @if (Auth::user()->id===$avtor->id)
             <h4>Добавить книгу</h4>
     <form method="POST" action="{{route('add', ['username' => $avtor->id])}}" novalidate>
@@ -33,6 +28,11 @@
     </div>
         <button type="submit" class="btn btn-primary mb-3">Опубликовать</button><hr>
     </form>
+    <div>
+    @if ($link)
+        Ссылка на библиотеку: http://task10/links/{{$link->user_id}}
+    @endif<hr>
+    </div>
     @else
     @if($reader)
         @if ($reader->accepted===1)

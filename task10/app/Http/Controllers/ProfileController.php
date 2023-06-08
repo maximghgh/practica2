@@ -6,6 +6,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Reader;
+use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,7 @@ class ProfileController extends Controller
 
         $books=$avtor->books()->get();
 
-        $reader = DB::table('readers')->where('user_id', Auth::user()->id)->where('reader_id', $avtor->id)->first();
+        $reader = Reader::where('user_id', Auth::user()->id)->where('reader_id', $avtor->id)->first();
 
         if($reader==null)
         {
@@ -31,7 +32,7 @@ class ProfileController extends Controller
             $read_book='';
         }
 
-        $link=DB::table('links')->where('user_id', Auth::user()->id)->first();
+        $link=Link::where('user_id', Auth::user()->id)->first();
 
         if($link===null)
         {

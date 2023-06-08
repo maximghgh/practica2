@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Link;
 use App\Models\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class LinkController extends Controller
 
         $read_book='';
 
-        $link=DB::table('links')->where('user_id', $username)->first();
+        $link=Link::where('user_id', $username)->first();
 
         if($link===null)
         {

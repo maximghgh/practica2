@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@index')->name('home');
 
 
-Route::get('/signup', 'AuthController@getSignup')->name('auth.signup');
-Route::post('/signup', 'AuthController@postSignup');
+Route::get('/signup', 'AuthController@getSignup')->middleware('guest')->name('auth.signup');
+Route::post('/signup', 'AuthController@postSignup')->middleware('guest');
 
-Route::get('/signin', 'AuthController@getSignin')->name('auth.signin');
-Route::post('/signin', 'AuthController@postSignin');
+Route::get('/signin', 'AuthController@getSignin')->middleware('guest')->name('auth.signin');
+Route::post('/signin', 'AuthController@postSignin')->middleware('guest');
 
 Route::get('/signout', 'AuthController@getSignout')->name('auth.signout');
 
@@ -34,10 +34,10 @@ Route::get('/avtors/{username}', 'ProfileController@getProfile')->middleware('au
 
 //книги
 
-Route::get('/book/{bookid}', 'BookController@read')->name('book');
+Route::get('/book/{bookid}', 'BookController@read')->middleware('auth')->name('book');
 
 //добавление книги
-Route::post('/add/{username}', 'BookController@add')->name('add');
+Route::post('/add/{username}', 'BookController@add')->middleware('auth')->name('add');
 
 //редактирование книги
 Route::get('/edit/{bookid}', 'BookController@getedit')->middleware('auth')->name('edit');
@@ -52,8 +52,8 @@ Route::get('reader/del/{username}', 'ReaderController@delReader')->middleware('a
 
 //доступ по ссылке
 
-Route::get('link', 'LinkController@getLink')->name('link');
+Route::get('link', 'LinkController@getLink')->middleware('auth')->name('link');
 
 Route::get('links/{username}', 'LinkController@viewLink');
 
-Route::get('links/book/{bookid}', 'BookController@readLink')->name('links.book');
+Route::get('links/book/{bookid}', 'BookController@readLink')->middleware('auth')->name('links.book');
