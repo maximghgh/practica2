@@ -54,4 +54,4 @@ Route::get('reader/del/{username}', 'ReaderController@delReader')->middleware('a
 
 Route::get('linkbook/{bookid}', 'LinkController@getLink')->middleware('auth')->name('linkbook');
 
-Route::get('linkbook-read/{bookid}', 'BookController@readLink')->middleware('link')->name('read.link');
+Route::get('readbook/{bookid}', 'BookController@readLink')->middleware('link')->name('read.link');

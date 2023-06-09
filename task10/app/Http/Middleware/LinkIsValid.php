@@ -25,6 +25,8 @@ class LinkIsValid
         if($book)
         {
             $link = Link::where('book_id', $bookid) -> first();
+
+            if( ! $link) return redirect() -> route('home');
             
             return $next($request);
         }
