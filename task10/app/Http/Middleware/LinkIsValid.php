@@ -15,17 +15,22 @@ class LinkIsValid
      */
     public function handle($request, Closure $next)
     {
-        $bookId = explode('/', $request);
-        $bookId = $bookId[3];
-        $bookId = explode(' ', $bookId);
-        $bookId = $bookId[0];
+        $bookid = explode('/', $request);
+        $bookid = $bookid[2];
+        $bookid = explode(' ', $bookid);
+        $bookid = $bookid[0];
 
-        $book = Book::where('id', $bookId) -> first();
+        $book = Book::where('id', $bookid) -> first();
 
         if($book)
         {
+            $link = Link::where('book_id', $bookid) -> first();
+
+            if( ! $link) return redirect() -> route('home');
+            
             return $next($request);
         }
-        return redirect() -> route('index');
+        
+        return redirect() -> route('home');
     }
 }

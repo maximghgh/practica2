@@ -12,37 +12,45 @@ use Illuminate\Support\Facades\DB;
 
 class LinkController extends Controller
 {
-    public function getLink()
+    public function getLink($bookid)
     {
-        DB::table('links')->insert(['user_id' => Auth::user()->id]);
+        DB::table('links') -> insert(['book_id' => $bookid]);
 
-        return redirect()->back();
+        $link = Link::where('book_id', $bookid) -> first();
+
+        return view('links.index', [
+
+            'link' => $link
+
+        ]) -> with('info', 'Можете поделится своей библиотекой');
     }
 
-    public function viewLink($username)
+    public function viewLink($bookid)
     {
-        $avtor=User::where('id', $username)->first();
-        
-        $books=$avtor->books()->get();
+        $book=Book::where('id', $bookid) -> first();
 
-        $reader='';
+        $reader = '';
 
-        $read_book='';
+        $read_book = '';
 
-        $link=Link::where('user_id', $username)->first();
+        $link=Link::where('book_id', $bookid) -> first();
 
-        if($link===null)
+        if($link === null)
         {
+
             $link='';
+
         }
 
 
         return view('links.index', [
-            'avtor' => $avtor,
-            'books' => $books,
+
+            'book' => $book,
             'reader' => $reader,
             'read_book' => $read_book,
             'link' => $link
+
         ]);
+
     }
 }

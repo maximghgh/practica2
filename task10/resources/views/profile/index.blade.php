@@ -28,11 +28,6 @@
     </div>
         <button type="submit" class="btn btn-primary mb-3">Опубликовать</button><hr>
     </form>
-    <div>
-    @if ($link)
-        Ссылка на библиотеку: http://task10/links/{{$link->user_id}}
-    @endif<hr>
-    </div>
     @else
     @if($reader)
         @if ($reader->accepted===1)

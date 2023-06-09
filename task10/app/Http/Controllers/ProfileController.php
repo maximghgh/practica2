@@ -14,37 +14,31 @@ class ProfileController extends Controller
 {
     public function getProfile($username)
     {
-        $avtor=User::where('username',$username)->first();
+        $avtor = User::where('username',$username) -> first();
 
-        $books=$avtor->books()->get();
+        $books = $avtor -> books() -> get();
 
-        $reader = Reader::where('user_id', Auth::user()->id)->where('reader_id', $avtor->id)->first();
+        $reader = Reader::where('user_id', Auth::user()->id) -> where('reader_id', $avtor->id) -> first();
 
-        if($reader==null)
+        if($reader == null)
         {
-            $reader='';
+            $reader = '';
         }
 
-        $read_book=DB::table('readers')->where('user_id', $avtor)->where('reader_id', Auth::user()->id)->first();
+        $read_book = DB::table('readers') -> where('user_id', $avtor) -> where('reader_id', Auth::user() -> id) -> first();
 
-        if($read_book==null)
+        if($read_book == null)
         {
-            $read_book='';
-        }
-
-        $link=Link::where('user_id', Auth::user()->id)->first();
-
-        if($link===null)
-        {
-            $link='';
+            $read_book = '';
         }
 
         return view('profile.index', [
+
             'avtor' => $avtor,
             'books' => $books,
             'reader' => $reader,
             'read_book' => $read_book,
-            'link' => $link
+
         ]);
     }
     

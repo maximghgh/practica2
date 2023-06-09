@@ -52,8 +52,6 @@ Route::get('reader/del/{username}', 'ReaderController@delReader')->middleware('a
 
 //доступ по ссылке
 
-Route::get('link', 'LinkController@getLink')->name('link');
+Route::get('linkbook/{bookid}', 'LinkController@getLink')->middleware('auth')->name('linkbook');
 
-Route::get('links/{username}', 'LinkController@viewLink');
-
-Route::get('links/book/{bookid}', 'BookController@readLink')->middleware('link')->name('links.book');
+Route::get('linkbook-read/{bookid}', 'BookController@readLink')->middleware('link')->name('read.link');
