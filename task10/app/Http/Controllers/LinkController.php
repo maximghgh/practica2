@@ -14,43 +14,14 @@ class LinkController extends Controller
 {
     public function getLink($bookid)
     {
-        DB::table('links') -> insert(['book_id' => $bookid]);
 
-        $link = Link::where('book_id', $bookid) -> first();
-
-        return view('links.index', [
-
-            'link' => $link
-
-        ]) -> with('info', 'Можете поделится своей библиотекой');
-    }
-
-    public function viewLink($bookid)
-    {
-        $book=Book::where('id', $bookid) -> first();
-
-        $reader = '';
-
-        $read_book = '';
-
-        $link=Link::where('book_id', $bookid) -> first();
-
-        if($link === null)
-        {
-
-            $link='';
-
+        if (Link::where('book_id', $bookid) -> first()) {
+            return redirect() -> back() -> with('info', 'Книга уже расшарена');
         }
 
+        Link::create(['book_id' => $bookid]);
 
-        return view('links.index', [
-
-            'book' => $book,
-            'reader' => $reader,
-            'read_book' => $read_book,
-            'link' => $link
-
-        ]);
-
+        return redirect() -> back() -> with('info', 'Теперь вы можете поделится своей книгой');
     }
+
 }

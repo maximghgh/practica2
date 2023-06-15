@@ -38,10 +38,12 @@ class AuthController extends Controller
             'email' => 'required|max:255',
             'password' => 'required|min:8',
         ]);
-        if(!Auth::attempt( $request->only(['email' , 'password']),$request->has('remember') ))
+
+        if ( ! Auth::attempt( $request -> only(['email' , 'password']),$request -> has('remember') ))
         {
             return redirect()->back();
         }
+
         return redirect()->route('home')->with('info', 'Вы успешно вошли в аккаунт');
     }
 

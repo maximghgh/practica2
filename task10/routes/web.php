@@ -34,24 +34,24 @@ Route::get('/avtors/{username}', 'ProfileController@getProfile')->middleware('au
 
 //книги
 
-Route::get('/book/{bookid}', 'BookController@read')->name('book');
+Route::get('/book/{bookid}', 'BookController@read')->middleware('auth')->name('book');
 
 //добавление книги
-Route::post('/add/{username}', 'BookController@add')->name('add');
+Route::post('/add/{username}', 'BookController@add')->middleware('auth')->name('add');
 
 //редактирование книги
-Route::get('/edit/{bookid}', 'BookController@getedit')->name('edit');
-Route::post('/edit/{bookid}', 'BookController@postEdit');
+Route::get('/edit/{bookid}', 'BookController@getedit')->middleware('auth')->name('edit');
+Route::post('/edit/{bookid}', 'BookController@postEdit')->middleware('auth');
 
 //удаление 
-Route::get('/delete/{bookid}', 'BookController@deleteBook')->name('delete');
+Route::get('/delete/{bookid}', 'BookController@deleteBook')->middleware('auth')->name('delete');
 
 //добавление доступа и удаление из доступа к библиотеке
-Route::get('reader/{username}', 'ReaderController@addReader')->name('reader');
-Route::get('reader/del/{username}', 'ReaderController@delReader')->name('reader.del');
+Route::get('reader/{username}', 'ReaderController@addReader')->middleware('auth')->name('reader');
+Route::get('reader/del/{username}', 'ReaderController@delReader')->middleware('auth')->name('reader.del');
 
 //доступ по ссылке
 
-Route::get('linkbook/{bookid}', 'LinkController@getLink')->name('linkbook');
+Route::get('linkbook/{bookid}', 'LinkController@getLink')->middleware('auth')->name('linkbook');
 
 Route::get('readbook/{bookid}', 'BookController@readLink')->middleware('link')->name('read.link');

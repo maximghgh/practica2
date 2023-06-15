@@ -30,44 +30,22 @@ class BookController extends Controller
 
     public function read($bookid)
     {
-        $book=Book::find($bookid);
+        $book = Book::find($bookid);
 
-        if(Auth::user()->id==$book->user->id) 
-        {
-            $book=Book::where('id', $bookid)->first();
-
-            
-            return view('libraly.book', [
-                'book' => $book
-            ]);
-        }
-
-        $read=DB::table('readers')->where('user_id', $book->user->id)->where('reader_id', Auth::user()->id)->first();
-
-        if(Auth::user()->id==$read->reader_id && $read->accepted===1)
-        {
-            $book=Book::where('id', $bookid)->first();
-
-            return view('libraly.book',[
-                'book' => $book
-            ]);
-        }
-
-        return redirect()->route('home');
-
+        return view('libraly.book', [
+            'book' => $book
+        ]);
         
     }
 
-        public function getedit($bookid)
+    public function getedit($bookid)
     {
         $book=Book::find($bookid);
 
-        if(Auth::user()->id!==$book->user->id) 
+        if (Auth::user() -> id !== $book -> user -> id) 
         {
-            return redirect()->route('home');
+            return redirect() -> route('home');
         }
-
-        $book=Book::where('id', $bookid)->first();
 
         return view('libraly.edit', [
             'book' => $book
@@ -87,25 +65,26 @@ class BookController extends Controller
         [
             'name_book' => 'max:50',
         ]);
+        $book -> update(
+        [
+            'name_book' => $request -> input('name_book'),
+            'text' => $request -> input('text')
+        ]);
 
-        Book::where('id', $bookid)
-              ->update(['name_book' => $request->input('name_book'),'text' => $request->input('text')
-            ]);
-        
         return redirect()->back()->with('info', 'Публикация изменена');
     }
     public function deleteBook($bookid)
     {
         $book=Book::find($bookid);
 
-        if(Auth::user()->id!==$book->user->id)
+        if(Auth::user() -> id !== $book -> user -> id)
         {
-            return redirect()->route('home');
+            return redirect() -> route('home');
         }
 
-        Book::where('id', $bookid)->delete();
+        $book -> delete();
 
-        return redirect()->back()->with('info', 'Книга удалена из вашей библиотеки');
+        return redirect() -> back() -> with('info', 'Книга удалена из вашей библиотеки');
     }
 
     public function readLink($bookid)

@@ -13,12 +13,12 @@ class ReaderController extends Controller
     // добавить читателя
     public function addReader($username)
     {
-        if(Auth::user()->id==$username)
+        if(Auth::user() -> id == $username)
         {
-            return redirect()->route('home'); //проверка пользователя
+            return redirect()->route('home'); 
         }
 
-        $reader=DB::table('readers')->where('reader_id', $username)->first();
+        $reader=DB::table('readers') -> where('reader_id', $username) -> first();
 
         if($reader==null)
         {
@@ -27,12 +27,13 @@ class ReaderController extends Controller
 
         if($reader)
         {
-            DB::table('readers')->where('reader_id', $username)->update(['accepted' => 1]);
-            return redirect()->back()->with('info', 'Пользователю предоставлен доступ к библиотеке');
+            DB::table('readers') -> where('reader_id', $username)->update(['accepted' => 1]);
+
+            return redirect() -> back() -> with('info', 'Пользователю предоставлен доступ к библиотеке');
         }
 
-        DB::table('readers')->insert([
-            'user_id' => Auth::user()->id,
+        DB::table('readers') -> insert([
+            'user_id' => Auth::user() -> id,
             'reader_id' => $username
         ]);
 
@@ -42,13 +43,13 @@ class ReaderController extends Controller
 
     public function delReader($username)
     {
-        if(Auth::user()->id==$username)
+        if(Auth::user() -> id == $username)
         {
-            return redirect()->route('home'); //проверка пользователя
+            return redirect() -> route('home');
         }
 
-        DB::table('readers')->where('reader_id', $username)->update(['accepted' => 0]);
+        DB::table('readers') -> where('reader_id', $username) -> update(['accepted' => 0]);
 
-        return redirect()->back()->with('info', 'Доступ у пользователя был отключен');
+        return redirect() -> back() -> with('info', 'Доступ у пользователя был отключен');
     }
 }
