@@ -1,0 +1,132 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    background: conic-gradient(rgb(201, 200, 255), rgb(231, 188, 255),rgb(201, 200, 255), rgb(231, 188, 255),rgb(201, 200, 255), rgb(231, 188, 255),rgb(201, 200, 255)) fixed;
+}
+header
+{
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 95px;
+    background-color: #ffffff;
+    height: 40px;
+    width: 100%;
+}
+a
+{
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
+a:hover
+{
+    border-bottom: 1px solid black;
+}
+.wrapper
+{
+    width: 1440px;
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form2
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form1
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input
+{
+    padding: 5px;
+    width: 195px;
+    height: 40px;
+    border: none;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+h3
+{
+    display: flex;
+    padding-bottom: 10px;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h4
+{
+    display: flex;
+    padding-bottom: 10px;
+    color: rgb(0, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+nav
+{
+    display: flex;
+    gap: 10px;
+}
+
+ul
+{
+    display: flex;
+    gap: 20px;
+}
+
+li
+{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+textarea
+{
+    padding: 10px;
+    width: 400px;
+    height: 300px;
+    border: none;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+
+select
+{
+    border: none;
+    width: 420px;
+    height: 30px;
+    background-color: #ffffff;
+    
+}
+.task
+{
+    padding-top: 30px;
+    padding-left: 100px;
+    display: flex;
+    gap: 500px;
+
+}
+
+.form_task
+{
+    display: flex;
+    gap: 10px;
+}
+
+
